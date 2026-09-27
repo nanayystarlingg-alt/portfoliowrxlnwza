@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEIR | Student Portfolio & Game Dev</title>
+    
+    <!-- Google Fonts: Prompt & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Prompt', 'Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Plus Jakarta Sans', 'Prompt', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            400: '#38bdf8',
+                            500: '#06b6d4',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                        },
+                        accent: {
+                            purple: '#a855f7',
+                            pink: '#ec4899',
+                            emerald: '#10b981',
+                            amber: '#f59e0b',
+                        },
+                        darkBg: '#0f172a',
+                        cardDark: '#1e293b'
+                    },
+                    animation: {
+                        'float': 'float 4s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom Visual Tweaks -->
+    <style>
+        body {
+            font-family: 'Prompt', 'Plus Jakarta Sans', sans-serif;
+            background-color: #0b0f19;
+            color: #f1f5f9;
+            overflow-x: hidden;
+        }
+        
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card-hover:hover {
+            transform: translateY(-4px);
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 12px 30px -10px rgba(56, 189, 248, 0.25);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #38bdf8 0%, #a855f7 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-border {
+            position: relative;
+            border-radius: 1rem;
+            background: linear-gradient(135deg, rgba(56,189,248,0.3), rgba(168,85,247,0.3));
+            padding: 1px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #38bdf8;
+        }
+    </style>
+</head>
+<body class="antialiased text-slate-100 min-h-screen flex flex-col justify-between">
+
+    <!-- NAVIGATION (VibeUI: Minimal Logo + Links + CTA) -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/80 border-b border-slate-800/80 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo -->
+            <a href="#hero" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-500 via-purple-500 to-pink-500 p-0.5 transition-transform group-hover:scale-105">
+                    <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
+                        <span class="font-black text-lg text-sky-400 group-hover:text-pink-400 transition-colors">W</span>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-bold text-xl tracking-wider text-white" id="nav-logo-text">WEIR</span>
+                    <span class="text-[10px] text-sky-400 uppercase tracking-widest font-semibold">Student Portfolio</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="#about" class="text-slate-300 hover:text-sky-400 text-sm font-medium transition-colors">About Me</a>
+                <a href="#skills" class="text-slate-300 hover:text-sky-400 text-sm font-medium transition-colors">Skills</a>
+                <a href="#games" class="text-slate-300 hover:text-sky-400 text-sm font-medium transition-colors">My Games</a>
+                <a href="#learning" class="text-slate-300 hover:text-sky-400 text-sm font-medium transition-colors">Morning Session</a>
+                <a href="#contact" class="text-slate-300 hover:text-sky-400 text-sm font-medium transition-colors">Contact</a>
+            </nav>
+
+            <!-- CTA & Mobile Toggle -->
+            <div class="flex items-center gap-4">
+                <a href="#games" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-sky-500 to-purple-600 hover:from-sky-400 hover:to-purple-500 text-white font-medium text-sm shadow-lg shadow-sky-500/20 transition-all hover:shadow-sky-500/40 hover:-translate-y-0.5 active:translate-y-0" id="nav-cta-btn">
+                    <i class="fa-solid font-bold fa-gamepad"></i>
+                    <span>Play My Games</span>
+                </a>
+
+                <button id="mobile-menu-btn" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg bg-slate-800/80 focus:outline-none" aria-label="Toggle menu">
+                    <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900/95 border-b border-slate-800 px-4 pt-2 pb-6 space-y-3">
+            <a href="#about" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-sky-400">About Me</a>
+            <a href="#skills" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-sky-400">Skills</a>
+            <a href="#games" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-sky-400">My Games</a>
+            <a href="#learning" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-sky-400">Morning Session</a>
+            <a href="#contact" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-sky-400">Contact</a>
+            <a href="#games" class="mobile-link mt-2 flex justify-center items-center gap-2 w-full py-3 rounded-xl bg-gradient-to-r from-sky-500 to-purple-600 text-white font-semibold">
+                <i class="fa-solid fa-gamepad"></i> Play My Games
+            </a>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- SPLIT HERO SECTION (VibeUI: Split Hero) -->
+        <section id="hero" class="relative pt-12 pb-20 lg:pt-20 lg:pb-28 overflow-hidden">
+            <!-- Ambient Glow Backgrounds -->
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-sky-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+            <div class="absolute top-1/3 right-10 w-[350px] h-[350px] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Hero Left: Content -->
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/80 border border-sky-500/30 text-sky-400 text-xs sm:text-sm font-medium animate-pulse-slow">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                            <span>Bangpakokwittayacom School • Class <span id="hero-grade">5/8</span></span>
+                        </div>
+
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                            สวัสดีครับ! ผม <span class="gradient-text" id="hero-fullname">ธนวัฒน์ ทองมหา</span>
+                            <br/>
+                            <span class="text-2xl sm:text-3xl lg:text-4xl text-slate-300 font-bold font-sans">ชื่อเล่น "(<span id="hero-nickname" class="text-sky-400">เวียร์</span>)"</span>
+                        </h1>
+
+                        <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0" id="hero-bio">
+                            มาจากโรงเรียนบางปะกอกวิทยาคม ชอบเกี่ยวกับคอมพิวเตอร์และการเขียนโค้ด กำลังสนุกกับการสร้างสรรค์เกมดิจิทัลและการเรียนรู้ด้านนวัตกรรมไอที
+                        </p>
+
+                        <!-- Highlights Tags -->
+                        <div class="flex flex-wrap justify-center lg:justify-start gap-2 pt-2">
+                            <span class="px-3 py-1.5 rounded-lg bg-slate-800/90 text-slate-300 text-xs font-medium border border-slate-700/60 flex items-center gap-1.5">
+                                <i class="fa-solid fa-code text-sky-400"></i> Game Developer
+                            </span>
+                            <span class="px-3 py-1.5 rounded-lg bg-slate-800/90 text-slate-300 text-xs font-medium border border-slate-700/60 flex items-center gap-1.5">
+                                <i class="fa-solid fa-cube text-purple-400"></i> 3D Modeler (Blender)
+                            </span>
+                            <span class="px-3 py-1.5 rounded-lg bg-slate-800/90 text-slate-300 text-xs font-medium border border-slate-700/60 flex items-center gap-1.5">
+                                <i class="fa-solid fa-palette text-pink-400"></i> Digital Artist
+                            </span>
+                        </div>
+
+                        <!-- Hero Action Buttons -->
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                            <a href="#games" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-sky-500 via-blue-600 to-purple-600 hover:from-sky-400 hover:to-purple-500 text-white font-semibold text-center shadow-lg shadow-sky-500/25 transition-all hover:scale-105 active:scale-95">
+                                <i class="fa-solid fa-rocket mr-2"></i> ลองเล่นเกมของผม
+                            </a>
+                            <a href="#about" class="w-full sm:w-auto px-8 py-3.5 rounded-xl glass-card text-slate-200 font-semibold text-center hover:bg-slate-800 hover:text-white transition-all border border-slate-700/60">
+                                <i class="fa-regular fa-user mr-2"></i> ประวัติเพิ่มเติม
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Hero Right: Avatar & Profile Card -->
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="relative w-full max-w-sm sm:max-w-md">
+                            
+                            <!-- Glowing Aura -->
+                            <div class="absolute -inset-1.5 bg-gradient-to-r from-sky-500 via-purple-500 to-pink-500 rounded-3xl blur-lg opacity-75 animate-pulse-slow"></div>
+                            
+                            <!-- Profile Card Frame -->
+                            <div class="relative glass-card p-6 rounded-3xl bg-slate-900/90 border border-slate-700/80 shadow-2xl space-y-6">
+                                
+                                <!-- Profile Image Container -->
+                                <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-slate-800 border-2 border-slate-700/60 group">
+                                    <img id="hero-profile-img" 
+                                         src="https://lh3.googleusercontent.com/d/1rFj5Gu3PH7xebuIO5OJ_mgTmp88r1pa7=s800" 
+                                         alt="เวียร์ - ธนวัฒน์ ทองมหา" 
+                                         class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1566492031773-4f4e44671857?q=80&w=800&auto=format&fit=crop';" />
+                                    
+                                    <div class="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-slate-950/80 backdrop-blur-md border border-white/10 flex items-center justify-between">
+                                        <div>
+                                            <p class="text-xs text-slate-400">สถานะ</p>
+                                            <p class="text-xs font-semibold text-emerald-400 flex items-center gap-1.5">
+                                                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> พร้อมเรียนรู้ & สร้างสรรค์
+                                            </p>
+                                        </div>
+                                        <div class="w-8 h-8 rounded-lg bg-sky-500/20 text-sky-400 flex items-center justify-center">
+                                            <i class="fa-solid fa-graduation-cap"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Quick Profile Summary Box -->
+                                <div class="space-y-3 pt-2">
+                                    <div class="flex items-center justify-between p-3 rounded-xl bg-slate-800/60 border border-slate-700/40">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center">
+                                                <i class="fa-solid fa-bullseye"></i>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-slate-400">เป้าหมายอนาคต</p>
+                                                <p class="text-sm font-semibold text-slate-100" id="hero-future-goal">ติดมหาลัยที่อยากเข้า & สร้างรายได้</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS SECTION (VibeUI: Bento Grid) -->
+        <section id="skills" class="py-16 bg-slate-950/60 relative border-t border-b border-slate-800/60">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
+                    <h2 class="text-xs font-bold text-sky-400 uppercase tracking-widest">My Capabilities</h2>
+                    <p class="text-3xl font-extrabold text-white sm:text-4xl">ทักษะและความสามารถ (Skills)</p>
+                    <p class="text-slate-400 text-sm">การผสมผสานระหว่างความคิดสร้างสรรค์ทางศิลปะและการเขียนโปรแกรม</p>
+                </div>
+
+                <!-- Bento Grid Layout -->
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+                    
+                    <!-- Bento 1: Coding Skill (Large Card) -->
+                    <div class="md:col-span-2 glass-card glass-card-hover p-6 rounded-2xl relative overflow-hidden flex flex-col justify-between group">
+                        <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-sky-500/10 rounded-full blur-2xl group-hover:bg-sky-500/20 transition-all"></div>
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-sky-500/20 border border-sky-500/30 text-sky-400 flex items-center justify-center text-xl mb-4">
+                                <i class="fa-solid fa-code"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">เขียนโค้ด & Game Development</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                ชอบเรียนรู้การเขียนโค้ดและตรรกะสำหรับการสร้างเกม สามารถพัฒนาเกมตอบสนอง (Interactive Game) ทั้งแบบการศึกษา เกมแอ็กชัน และเกมทำอาหารได้
+                            </p>
+                        </div>
+                        
+                        <div class="space-y-2 pt-2">
+                            <div class="flex justify-between text-xs font-medium">
+                                <span class="text-sky-300">Logic & Web Game Scripting</span>
+                                <span class="text-slate-400">Advanced Student</span>
+                            </div>
+                            <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                                <div class="bg-gradient-to-r from-sky-400 to-blue-500 h-full rounded-full w-[85%]"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bento 2: 3D Blender Skill -->
+                    <div class="glass-card glass-card-hover p-6 rounded-2xl flex flex-col justify-between border border-purple-500/20">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-purple-500/20 border border-purple-500/30 text-purple-400 flex items-center justify-center text-xl mb-4">
+                                <i class="fa-solid fa-cube"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2">ปั้นโมเดล Blender</h3>
+                            <p class="text-slate-300 text-xs leading-relaxed">
+                                ขึ้นรูปและสร้าง 3D Assets ด้วยโปรแกรม Blender นำมาประยุกต์ใช้ในเกม
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-purple-300 font-semibold">
+                            <span>3D Modeling</span>
+                            <i class="fa-solid fa-check-circle text-purple-400"></i>
+                        </div>
+                    </div>
+
+                    <!-- Bento 3: Drawing / Illustration -->
+                    <div class="glass-card glass-card-hover p-6 rounded-2xl flex flex-col justify-between border border-pink-500/20">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-pink-500/20 border border-pink-500/30 text-pink-400 flex items-center justify-center text-xl mb-4">
+                                <i class="fa-solid fa-paint-brush"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2">วาดรูปสวย (Drawing)</h3>
+                            <p class="text-slate-300 text-xs leading-relaxed">
+                                มีทักษะการวาดรูปและออกแบบ Character ดีไซน์บรรยากาศ และ UI ในเกม
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-pink-300 font-semibold">
+                            <span>Creative Design</span>
+                            <i class="fa-solid fa-check-circle text-pink-400"></i>
+                        </div>
+                    </div>
+
+                    <!-- Bento 4: Soft Skill - Work Ethic (Diligence) -->
+                    <div class="glass-card glass-card-hover p-6 rounded-2xl flex flex-col justify-between border border-emerald-500/20">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-xl mb-4">
+                                <i class="fa-solid fa-fire"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2">มีความขยัน & ตั้งใจ</h3>
+                            <p class="text-slate-300 text-xs leading-relaxed">
+                                พร้อมเรียนรู้เทคโนโลยีใหม่ๆ ในช่วงเช้าและต่อยอดลงมือทำผลงานจริงอย่างต่อเนื่อง
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-emerald-300 font-semibold">
+                            <span>Growth Mindset</span>
+                            <i class="fa-solid fa-star text-emerald-400"></i>
+                        </div>
+                    </div>
+
+                    <!-- Bento 5: Computer Passion (Wide Box) -->
+                    <div class="md:col-span-2 lg:col-span-3 glass-card glass-card-hover p-6 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-6 border border-amber-500/20">
+                        <div class="space-y-2">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 text-xs font-semibold">
+                                <i class="fa-solid fa-laptop-code"></i> Passionate Learner
+                            </div>
+                            <h3 class="text-lg font-bold text-white">ความหลงใหลในคอมพิวเตอร์และเทคโนโลยี</h3>
+                            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                                "ชอบเกี่ยวกับคอมพิวเตอร์และการเขียนโค้ด" มุ่งมั่นพัฒนาศักยภาพตนเองเพื่อก้าวสู่การเป็นโปรแกรมเมอร์และนักพัฒนาเกมในระดับมหาวิทยาลัย
+                            </p>
+                        </div>
+                        <div class="shrink-0">
+                            <a href="#games" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-sky-400 border border-sky-500/30 text-xs font-bold transition-all flex items-center gap-2">
+                                ดูผลงานที่สร้าง <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- LEARNING / ACTIVITIES SECTION (VibeUI: Learning Card Grid) -->
+        <section id="learning" class="py-16 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                    <div>
+                        <h2 class="text-xs font-bold text-purple-400 uppercase tracking-widest">Morning Learning Journey</h2>
+                        <h3 class="text-3xl font-extrabold text-white mt-1">สิ่งที่ได้เรียนรู้จากคลาสช่วงเช้า</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm mt-2 md:mt-0 max-w-md">
+                        สรุปเส้นทางการเรียนรู้และกระบวนการสร้างสรรค์ผลงานเกมภายในคลาสเรียน
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <!-- Step 1 Card -->
+                    <div class="glass-card p-6 rounded-2xl border border-slate-800 relative group hover:border-purple-500/40 transition-all">
+                        <div class="text-4xl font-black text-slate-800 group-hover:text-purple-500/20 absolute top-4 right-6 transition-colors">01</div>
+                        <div class="w-10 h-10 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center text-lg mb-4">
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">Game Design & Logic</h4>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            เรียนรู้การวางโครงสร้างระบบเกม (Game Logic), การจัดการสถานะของผู้เล่น และการคำนวณคะแนนในเกม
+                        </p>
+                    </div>
+
+                    <!-- Step 2 Card -->
+                    <div class="glass-card p-6 rounded-2xl border border-slate-800 relative group hover:border-sky-500/40 transition-all">
+                        <div class="text-4xl font-black text-slate-800 group-hover:text-sky-500/20 absolute top-4 right-6 transition-colors">02</div>
+                        <div class="w-10 h-10 rounded-lg bg-sky-500/20 text-sky-400 flex items-center justify-center text-lg mb-4">
+                            <i class="fa-solid fa-gears"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">Interactive Scripting</h4>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            เขียนโปรแกรมควบคุมการปฏิสัมพันธ์ เช่น การทำอาหารตามออเดอร์ การจำลองฟาร์ม และระบบจับคู่คำศัพท์
+                        </p>
+                    </div>
+
+                    <!-- Step 3 Card -->
+                    <div class="glass-card p-6 rounded-2xl border border-slate-800 relative group hover:border-pink-500/40 transition-all">
+                        <div class="text-4xl font-black text-slate-800 group-hover:text-pink-500/20 absolute top-4 right-6 transition-colors">03</div>
+                        <div class="w-10 h-10 rounded-lg bg-pink-500/20 text-pink-400 flex items-center justify-center text-lg mb-4">
+                            <i class="fa-solid fa-play"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">Deployment & Testing</h4>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            ทดสอบเกม แก้ไขบั๊ก และนำเสนอผลงานขึ้นสู่แพลตฟอร์มเพื่อให้ผู้ใช้อื่นสามารถเข้ามาเล่นได้จริง
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- MY GAMES SECTION (VibeUI: Featured Card + Card Grid) -->
+        <section id="games" class="py-20 bg-slate-950/80 relative border-t border-slate-800/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Section Header & Filter -->
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                    <div>
+                        <div class="inline-flex items-center gap-2 text-sky-400 text-xs font-bold uppercase tracking-widest mb-2">
+                            <i class="fa-solid fa-gamepad"></i> Portfolio Showcase
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">ผลงานเกมของฉัน (My Games)</h2>
+                    </div>
+
+                    <!-- Category Filter Buttons -->
+                    <div class="flex flex-wrap gap-2" id="category-filters">
+                        <button class="filter-btn active px-4 py-2 rounded-xl text-xs font-semibold bg-sky-500 text-white shadow-md shadow-sky-500/20 transition-all" data-category="All">
+                            ทั้งหมด
+                        </button>
+                        <button class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all" data-category="Simulation Game">
+                            Simulation
+                        </button>
+                        <button class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all" data-category="Action Game">
+                            Action
+                        </button>
+                        <button class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all" data-category="Educational Game">
+                            Educational
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Featured Game (Top Highlight) -->
+                <div id="featured-game-container" class="mb-12">
+                    <!-- Dynamic Featured Card rendered by JavaScript -->
+                </div>
+
+                <!-- Games Card Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="games-grid">
+                    <!-- Dynamic Games List rendered by JavaScript -->
+                </div>
+
+                <!-- Empty State (Hidden by default) -->
+                <div id="games-empty-state" class="hidden text-center py-16 glass-card rounded-2xl border border-slate-800">
+                    <i class="fa-solid fa-ghost text-4xl text-slate-600 mb-3"></i>
+                    <p class="text-slate-300 font-semibold">ไม่พบผลงานเกมในหมวดหมู่นี้</p>
+                    <p class="text-slate-500 text-xs mt-1">ลองเลือกหมวดหมู่อื่นดูนะครับ</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FOOTER SECTION (VibeUI: Multi-column Footer) -->
+        <footer id="contact" class="bg-slate-950 border-t border-slate-800 text-slate-400 pt-16 pb-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-slate-800">
+                    
+                    <!-- Footer Col 1: Brand & Bio -->
+                    <div class="md:col-span-5 space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-500 to-purple-600 flex items-center justify-center font-bold text-white text-lg">
+                                W
+                            </div>
+                            <span class="font-extrabold text-2xl text-white tracking-wider">WEIR</span>
+                        </div>
+                        <p class="text-slate-400 text-sm leading-relaxed max-w-sm">
+                            แฟ้มสะสมผลงานเกมและการพัฒนาโปรแกรมของ <span class="text-slate-200 font-semibold" id="footer-creator-name">เวียร์ (ธนวัฒน์ ทองมหา)</span> นักเรียนชั้น ม.5/8 โรงเรียนบางปะกอกวิทยาคม
+                        </p>
+                    </div>
+
+                    <!-- Footer Col 2: Navigation Links -->
+                    <div class="md:col-span-3 space-y-3">
+                        <p class="text-white font-semibold text-sm">เมนูด่วน</p>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#hero" class="hover:text-sky-400 transition-colors">หน้าแรก (Home)</a></li>
+                            <li><a href="#about" class="hover:text-sky-400 transition-colors">แนะนำตัว (About Me)</a></li>
+                            <li><a href="#skills" class="hover:text-sky-400 transition-colors">ทักษะ (Skills)</a></li>
+                            <li><a href="#games" class="hover:text-sky-400 transition-colors">ผลงานเกม (My Games)</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Footer Col 3: Contact Info -->
+                    <div class="md:col-span-4 space-y-3">
+                        <p class="text-white font-semibold text-sm">การติดต่อ (Contact)</p>
+                        
+                        <div class="space-y-2 text-sm">
+                            <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-900 border border-slate-800/80" id="footer-email-box">
+                                <i class="fa-solid fa-envelope text-sky-400"></i>
+                                <div class="overflow-hidden">
+                                    <p class="text-xs text-slate-500">อีเมลสำหรับติดต่อ</p>
+                                    <a href="mailto:nanayystarlingg@gmail.com" class="text-slate-200 hover:text-sky-400 transition-colors truncate block font-medium" id="footer-email-link">
+                                        nanayystarlingg@gmail.com
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-900 border border-slate-800/80">
+                                <i class="fa-solid fa-school text-purple-400"></i>
+                                <div>
+                                    <p class="text-xs text-slate-500">สถานศึกษา</p>
+                                    <p class="text-slate-200 font-medium">โรงเรียนบางปะกอกวิทยาคม</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Footer Bottom Copyright -->
+                <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+                    <p>© <span id="current-year">2026</span> ธนวัฒน์ ทองมหา (WEIR). All rights reserved.</p>
+                    <p class="flex items-center gap-1">
+                        Created with <i class="fa-solid fa-heart text-pink-500"></i> Student Game Portfolio
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- GAME PREVIEW MODAL -->
+    <div id="game-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 sm:p-6 bg-slate-950/90 backdrop-blur-md transition-opacity duration-300">
+        <div class="relative w-full max-w-5xl bg-slate-900 rounded-3xl border border-slate-700/80 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between px-6 py-4 bg-slate-950/80 border-b border-slate-800">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-sky-500/20 text-sky-400 flex items-center justify-center">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-white" id="modal-game-title">ชื่อเกม</h3>
+                        <p class="text-xs text-slate-400" id="modal-game-category">หมวดหมู่เกม</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <a id="modal-external-link" href="#" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-xl bg-sky-500 hover:bg-sky-400 text-white text-xs font-semibold flex items-center gap-2 transition-colors">
+                        <span>เปิดในหน้าต่างใหม่</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                    <button id="modal-close-btn" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center transition-colors">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Modal Content / Iframe Viewer -->
+            <div class="relative flex-grow bg-black min-h-[400px] sm:min-h-[500px]">
+                <iframe id="modal-iframe" class="w-full h-full border-0" src="" allow="autoplay; fullscreen"></iframe>
+                
+                <!-- Loading & Fallback Overlay -->
+                <div id="modal-iframe-loader" class="absolute inset-0 bg-slate-900/90 flex flex-col items-center justify-center p-6 text-center space-y-4">
+                    <div class="w-12 h-12 rounded-full border-4 border-sky-500/30 border-t-sky-500 animate-spin"></div>
+                    <div>
+                        <p class="text-white font-semibold">กำลังโหลดเกม...</p>
+                        <p class="text-slate-400 text-xs mt-1">หากเกมไม่แสดงผล กรุณากดปุ่ม "เปิดในหน้าต่างใหม่" ด้านบน</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer Info -->
+            <div class="px-6 py-4 bg-slate-950 border-t border-slate-800 text-xs text-slate-400 flex flex-col sm:flex-row justify-between gap-2">
+                <p id="modal-game-desc">คำอธิบายเกม</p>
+                <p class="shrink-0">ผู้สร้าง: <span class="text-slate-200 font-semibold" id="modal-game-creator">ธนวัฒน์</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- EDITABLE PORTFOLIO DATA ARCHITECTURE & INTERACTIVE SCRIPT -->
+    <script>
+        /*
+          ======================================================================
+          EDITABLE PORTFOLIO DATA STRUCTURE (Requirement #8)
+          สามารถแก้ไขข้อมูลส่วนตัว ผลงานเกม และทักษะตรงนี้ได้สะดวก
+          ======================================================================
+        */
+        const portfolioData = {
+            profile: {
+                fullname: "ธนวัฒน์ ทองมหา",
+                nickname: "เวียร์",
+                grade: "5/8",
+                school: "โรงเรียนบางปะกอกวิทยาคม",
+                bio: "มาจากโรงเรียนบางปะกอกวิทยาคม ชอบเกี่ยวกับคอมพิวเตอร์และการเขียนโค้ด กำลังเรียนรู้และพัฒนาทักษะการสร้างเกมสไตล์ต่างๆ",
+                profileImage: "https://lh3.googleusercontent.com/d/1rFj5Gu3PH7xebuIO5OJ_mgTmp88r1pa7=s800",
+                futureGoal: "อยากติดมหาลัยที่อยากเข้า และอยากสร้างรายได้จากการเขียนโค้ดและสร้างเกม",
+                logoText: "WEIR",
+                navCTA: "Play My Games"
+            },
+            skills: [
+                { name: "วาดรูปสวย", type: "Visual Art", icon: "fa-palette" },
+                { name: "เขียนโค้ด", type: "Programming", icon: "fa-code" },
+                { name: "ปั้นโมเดลใน Blender เป็น", type: "3D Art", icon: "fa-cube" },
+                { name: "ขยัน และพร้อมเรียนรู้", type: "Work Ethic", icon: "fa-fire" }
+            ],
+            games: [
+                {
+                    id: "game-1",
+                    title: "เกมฟาร์ม",
+                    creator: "ธนวัฒน์",
+                    description: "เกมเกี่ยวกับการทำฟาร์มเพื่อทำตัง บริหารจัดการผลผลิต วางแผนสร้างรายได้ในเกมจำลองสุดเพลิดเพลิน",
+                    category: "Simulation Game",
+                    year: "2026",
+                    gameUrl: "https://gemini.google.com/share/49a48bcadbfb?skid=1da80192-b843-4efb-8683-d58df222d480",
+                    buttonText: "Play Game",
+                    isFeatured: true,
+                    coverGradient: "from-emerald-600 to-teal-800",
+                    badgeColor: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
+                    icon: "fa-wheat-awn"
+                },
+                {
+                    id: "game-2",
+                    title: "ฮุนไดคุกกิ้ง",
+                    creator: "ธนวัฒน์",
+                    description: "ทำอาหารให้คนที่หิวโซกินเเบบงานไว ทดสอบความเร็วและการตอบสนองในการเสิร์ฟเมนูอร่อยให้ทันเวลา",
+                    category: "Action Game",
+                    year: "2026",
+                    gameUrl: "https://gemini.google.com/share/fde486ae75d9?skid=4a02866b-b74b-4979-b331-fd5836fed41b",
+                    buttonText: "Play Game",
+                    isFeatured: false,
+                    coverGradient: "from-amber-500 to-orange-700",
+                    badgeColor: "bg-amber-500/20 text-amber-300 border-amber-500/40",
+                    icon: "fa-utensils"
+                },
+                {
+                    id: "game-3",
+                    title: "ฮุนไดจับคู่",
+                    creator: "ธนวัฒน์",
+                    description: "จับคู่คำศัพท์ให้ตรงและถูกต้อง เกมเพื่อการเรียนรู้เสริมสร้างความจำและทักษะภาษาแบบสนุกสนาน",
+                    category: "Educational Game",
+                    year: "2026",
+                    gameUrl: "https://gemini.google.com/share/24da8f6d12d1?skid=9cdfdd03-4188-4586-9910-13135caa68d2",
+                    buttonText: "Play Game",
+                    isFeatured: false,
+                    coverGradient: "from-purple-600 to-indigo-800",
+                    badgeColor: "bg-purple-500/20 text-purple-300 border-purple-500/40",
+                    icon: "fa-puzzle-piece"
+                }
+            ],
+            contact: {
+                email: "nanayystarlingg@gmail.com",
+                school: "โรงเรียนบางปะกอกวิทยาคม"
+            }
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // Update Dynamic Profile Text
+            document.getElementById("hero-fullname").textContent = portfolioData.profile.fullname;
+            document.getElementById("hero-nickname").textContent = portfolioData.profile.nickname;
+            document.getElementById("hero-grade").textContent = portfolioData.profile.grade;
+            document.getElementById("hero-bio").textContent = portfolioData.profile.bio;
+            document.getElementById("hero-future-goal").textContent = portfolioData.profile.futureGoal;
+            document.getElementById("footer-creator-name").textContent = `${portfolioData.profile.nickname} (${portfolioData.profile.fullname})`;
+            document.getElementById("nav-logo-text").textContent = portfolioData.profile.logoText;
+            document.getElementById("current-year").textContent = new Date().getFullYear();
+
+            // Contact Email Handling (Hide if empty according to specs)
+            const emailBox = document.getElementById("footer-email-box");
+            const emailLink = document.getElementById("footer-email-link");
+            if (portfolioData.contact.email) {
+                emailLink.textContent = portfolioData.contact.email;
+                emailLink.href = `mailto:${portfolioData.contact.email}`;
+            } else if (emailBox) {
+                emailBox.style.display = "none";
+            }
+
+            // Mobile Menu Toggle
+            const mobileBtn = document.getElementById("mobile-menu-btn");
+            const mobileMenu = document.getElementById("mobile-menu");
+            const menuIcon = document.getElementById("menu-icon");
+
+            mobileBtn.addEventListener("click", () => {
+                const isHidden = mobileMenu.classList.contains("hidden");
+                if (isHidden) {
+                    mobileMenu.classList.remove("hidden");
+                    menuIcon.classList.remove("fa-bars");
+                    menuIcon.classList.add("fa-xmark");
+                } else {
+                    mobileMenu.classList.add("hidden");
+                    menuIcon.classList.remove("fa-xmark");
+                    menuIcon.classList.add("fa-bars");
+                }
+            });
+
+            // Close mobile menu on link click
+            document.querySelectorAll(".mobile-link").forEach(link => {
+                link.addEventListener("click", () => {
+                    mobileMenu.classList.add("hidden");
+                    menuIcon.classList.remove("fa-xmark");
+                    menuIcon.classList.add("fa-bars");
+                });
+            });
+
+            // Render Games Section (Featured + Grid Layout)
+            renderGames("All");
+
+            // Category Filter Event Listeners
+            const filterBtns = document.querySelectorAll(".filter-btn");
+            filterBtns.forEach(btn => {
+                btn.addEventListener("click", (e) => {
+                    filterBtns.forEach(b => {
+                        b.classList.remove("bg-sky-500", "text-white", "shadow-sky-500/20");
+                        b.classList.add("bg-slate-800", "text-slate-300");
+                    });
+
+                    e.target.classList.remove("bg-slate-800", "text-slate-300");
+                    e.target.classList.add("bg-sky-500", "text-white", "shadow-sky-500/20");
+
+                    const category = e.target.getAttribute("data-category");
+                    renderGames(category);
+                });
+            });
+
+            // Modal Controls
+            const modal = document.getElementById("game-modal");
+            const modalCloseBtn = document.getElementById("modal-close-btn");
+
+            modalCloseBtn.addEventListener("click", closeModal);
+            modal.addEventListener("click", (e) => {
+                if (e.target === modal) closeModal();
+            });
+
+            // ESC key to close modal
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+                    closeModal();
+                }
+            });
+        });
+
+        // Function to Render Games
+        function renderGames(selectedCategory) {
+            const featuredContainer = document.getElementById("featured-game-container");
+            const gridContainer = document.getElementById("games-grid");
+            const emptyState = document.getElementById("games-empty-state");
+
+            // Filter Games
+            const filtered = portfolioData.games.filter(g => 
+                selectedCategory === "All" ? true : g.category === selectedCategory
+            );
+
+            if (filtered.length === 0) {
+                featuredContainer.innerHTML = "";
+                gridContainer.innerHTML = "";
+                emptyState.classList.remove("hidden");
+                return;
+            } else {
+                emptyState.classList.add("hidden");
+            }
+
+            // Identify Featured Game
+            let featuredGame = filtered.find(g => g.isFeatured) || filtered[0];
+            let otherGames = filtered.filter(g => g.id !== featuredGame.id);
+
+            // Render Featured Card
+            featuredContainer.innerHTML = `
+                <div class="glass-card rounded-3xl overflow-hidden border border-slate-700/80 shadow-2xl transition-all duration-300 hover:border-sky-500/50">
+                    <div class="grid grid-cols-1 lg:grid-cols-12">
+                        
+                        <!-- Featured Banner / Visual -->
+                        <div class="lg:col-span-7 relative min-h-[260px] sm:min-h-[340px] bg-gradient-to-br ${featuredGame.coverGradient} p-8 flex flex-col justify-between overflow-hidden group">
+                            <div class="absolute inset-0 bg-slate-950/20 group-hover:bg-slate-950/10 transition-colors"></div>
+                            
+                            <!-- Category Badge -->
+                            <div class="relative z-10 flex items-center justify-between">
+                                <span class="px-3.5 py-1.5 rounded-full text-xs font-bold border backdrop-blur-md ${featuredGame.badgeColor}">
+                                    <i class="fa-solid ${featuredGame.icon} mr-1.5"></i> ${featuredGame.category}
+                                </span>
+                                <span class="text-xs font-semibold px-3 py-1 rounded-full bg-slate-900/60 backdrop-blur-md text-slate-300">
+                                    ${featuredGame.year}
+                                </span>
+                            </div>
+
+                            <!-- Decorative Large Game Icon Graphic -->
+                            <div class="relative z-10 my-auto text-center lg:text-left py-6">
+                                <i class="fa-solid ${featuredGame.icon} text-7xl sm:text-8xl text-white/20 group-hover:scale-110 transition-transform duration-500 inline-block"></i>
+                            </div>
+
+                            <div class="relative z-10">
+                                <span class="text-xs uppercase font-extrabold tracking-widest text-sky-200">Featured Highlight</span>
+                                <h3 class="text-2xl sm:text-3xl font-extrabold text-white">${featuredGame.title}</h3>
+                            </div>
+                        </div>
+
+                        <!-- Featured Content Details -->
+                        <div class="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between space-y-6 bg-slate-900/90">
+                            <div class="space-y-4">
+                                <div>
+                                    <h4 class="text-xl font-bold text-white mb-2">${featuredGame.title}</h4>
+                                    <p class="text-slate-300 text-sm leading-relaxed">${featuredGame.description}</p>
+                                </div>
+
+                                <div class="space-y-2 pt-2 border-t border-slate-800 text-xs text-slate-400">
+                                    <div class="flex justify-between py-1">
+                                        <span>ผู้สร้าง (Creator):</span>
+                                        <span class="text-slate-200 font-semibold">${featuredGame.creator}</span>
+                                    </div>
+                                    <div class="flex justify-between py-1">
+                                        <span>ประเภท (Category):</span>
+                                        <span class="text-sky-400 font-semibold">${featuredGame.category}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col sm:flex-row gap-3 pt-4 border-t border-slate-800">
+                                <button onclick="openGameModal('${featuredGame.id}')" class="flex-1 py-3 px-5 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-semibold text-xs sm:text-sm shadow-lg shadow-sky-500/20 transition-all text-center flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-play"></i> ${featuredGame.buttonText}
+                                </button>
+                                <a href="${featuredGame.gameUrl}" target="_blank" rel="noopener noreferrer" class="py-3 px-4 rounded-xl glass-card hover:bg-slate-800 text-slate-300 hover:text-white text-xs font-semibold transition-all text-center flex items-center justify-center gap-1.5 border border-slate-700/60">
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            `;
+
+            // Render Grid Cards
+            gridContainer.innerHTML = otherGames.map(game => `
+                <div class="glass-card glass-card-hover rounded-2xl overflow-hidden border border-slate-800 flex flex-col justify-between group">
+                    <div>
+                        <!-- Game Card Banner -->
+                        <div class="relative h-44 bg-gradient-to-br ${game.coverGradient} p-5 flex flex-col justify-between overflow-hidden">
+                            <div class="flex items-center justify-between z-10">
+                                <span class="px-3 py-1 rounded-full text-[11px] font-bold border backdrop-blur-md ${game.badgeColor}">
+                                    ${game.category}
+                                </span>
+                                <span class="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-900/60 text-slate-300">
+                                    ${game.year}
+                                </span>
+                            </div>
+
+                            <div class="text-center z-10 py-2">
+                                <i class="fa-solid ${game.icon} text-5xl text-white/30 group-hover:scale-110 transition-transform duration-300 inline-block"></i>
+                            </div>
+
+                            <div class="z-10">
+                                <p class="text-xs text-sky-200 font-medium">By ${game.creator}</p>
+                                <h4 class="text-lg font-bold text-white">${game.title}</h4>
+                            </div>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="p-5 space-y-3">
+                            <p class="text-slate-300 text-xs leading-relaxed line-clamp-3">${game.description}</p>
+                        </div>
+                    </div>
+
+                    <!-- Card Actions -->
+                    <div class="p-5 pt-0 mt-auto flex items-center gap-2">
+                        <button onclick="openGameModal('${game.id}')" class="flex-1 py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-sky-500 text-sky-300 hover:text-white text-xs font-semibold transition-all flex items-center justify-center gap-2 border border-slate-700/60 hover:border-sky-500">
+                            <i class="fa-solid fa-play"></i> ${game.buttonText}
+                        </button>
+                        <a href="${game.gameUrl}" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white text-xs transition-all border border-slate-700/60" title="Open Link">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Modal Handler Functions
+        function openGameModal(gameId) {
+            const game = portfolioData.games.find(g => g.id === gameId);
+            if (!game) return;
+
+            document.getElementById("modal-game-title").textContent = game.title;
+            document.getElementById("modal-game-category").textContent = `${game.category} • ${game.year}`;
+            document.getElementById("modal-game-desc").textContent = game.description;
+            document.getElementById("modal-game-creator").textContent = game.creator;
+            document.getElementById("modal-external-link").href = game.gameUrl;
+
+            const modalIframe = document.getElementById("modal-iframe");
+            const modalLoader = document.getElementById("modal-iframe-loader");
+
+            modalLoader.classList.remove("hidden");
+            modalIframe.src = game.gameUrl;
+
+            // Hide loader after iframe attempts load
+            modalIframe.onload = () => {
+                modalLoader.classList.add("hidden");
+            };
+
+            // Timeout safety for loader
+            setTimeout(() => {
+                modalLoader.classList.add("hidden");
+            }, 2500);
+
+            const modal = document.getElementById("game-modal");
+            modal.classList.remove("hidden");
+            document.body.style.overflow = "hidden"; // Prevent background scroll
+        }
+
+        function closeModal() {
+            const modal = document.getElementById("game-modal");
+            const modalIframe = document.getElementById("modal-iframe");
+            modal.classList.add("hidden");
+            modalIframe.src = ""; // Stop audio/video playing in background
+            document.body.style.overflow = ""; // Restore background scroll
+        }
+    </script>
+</body>
+</html>
